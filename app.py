@@ -16,10 +16,27 @@ sp.trace = False
 def index():
     return flask.render_template("index.html")
 
-@app.route("/playlist/<playlist_id>")
-def playlist_api(playlist_id):
-    song_data = []
+@app.route("/api/song/<songID>/")
+def song_api(songID):
+    analysis = sp.audio_analysis(songID)
 
+    new_analysis = analysis.copy()
+    del new_analysis['segments']
+    new_analysis['segments'] = []
+    for segment in analysis['segments']:
+        new_segment = segment.copy()
+        del new_segment['pitches']
+        new_segment['pitches'] = []
+        pitchTotal = 0
+        for pitch in segment['pitches']:
+            pitchTotal += pitch
+
+        for pitch in segment['pitches']:
+            pitch = pitch / pitchTotal * 100
+            new_segment['pitches'].append(pitch)
+        new_analysis['segments'].append(new_segment)
+    
+    return new_analysis
 
 if __name__ == '__main__':
     app.run(debug=True, use_reloader=True)
