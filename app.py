@@ -25,6 +25,10 @@ def song_api(songID):
     new_analysis['segments'] = []
     for segment in analysis['segments']:
         new_segment = segment.copy()
+        
+        del new_segment['start']
+        new_segment['start'] = round(segment['start'], 2)
+        
         del new_segment['pitches']
         new_segment['pitches'] = []
         pitchTotal = 0
