@@ -19,8 +19,10 @@ def index():
 @app.route("/api/song/<songID>/")
 def song_api(songID):
     analysis = sp.audio_analysis(songID)
+    name = sp.track(songID)
 
     new_analysis = analysis.copy()
+    new_analysis['name'] = name
     del new_analysis['segments']
     new_analysis['segments'] = []
     for segment in analysis['segments']:
@@ -41,6 +43,11 @@ def song_api(songID):
         new_analysis['segments'].append(new_segment)
     
     return new_analysis
+
+@app.route("/api/search/<query>/")
+def track_search(query):
+    search = sp.search(query, type='track')
+    return search
 
 if __name__ == '__main__':
     app.run(debug=True, use_reloader=True)
