@@ -10,7 +10,7 @@ This is known as the chromatic scale.
 
 This web app uses the Spotify API to visualize an audio analysis for virtually any song.
 
-(imgs/Rumble.png)
+![Image](imgs/Rumble.png)
 
 Zoom in to find specific chords or zoom out to recognize chorus structures.
 ------------
