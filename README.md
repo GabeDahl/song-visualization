@@ -8,8 +8,11 @@ A link to the live app will go here soon.
 Pitches are organized into 12 classes -- C, C#, D, D#, E, F and so on. 
 This is known as the chromatic scale.
 
-This application uses the Spotify API to visualize an audio analysis for virtually any song.
+This web app uses the Spotify API to visualize an audio analysis for virtually any song.
 
+(imgs/Rumble.png)
+
+Zoom in to find specific chords or zoom out to recognize chorus structures.
 ------------
 
 #### Explore several featured tracks or search for your own favorites!
