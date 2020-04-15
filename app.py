@@ -9,12 +9,6 @@ scope = 'user-top-read'
 
 app = flask.Flask(__name__, static_folder='./build/static', template_folder='./build')
 
-util.prompt_for_user_token(username,
-                           scope,
-                           client_id='7ec7cb0a86f144dd80ec7a6f6e1af76f',
-                           client_secret='acd12ab771124e21bc43ccef11a0cab4',
-                           redirect_uri='https://google.com')
-
 sp = spotipy.Spotify(client_credentials_manager=SpotifyOAuth(scope=scope, cache_path='.cache-yomama1175')
 sp.trace = False
 
