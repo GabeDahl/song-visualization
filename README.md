@@ -12,10 +12,16 @@ This web app uses the Spotify API to visualize an audio analysis for virtually a
 
 ![Rumble](imgs/Rumble.png)
 
-Zoom in to find specific chords 
+##### Zoom in to find specific chords 
 ![Ellipsis](imgs/Ellipsis.png)
-Zoom out to recognize chorus structures
-![Overture](imgs/1812 Overture.png)
+
+
+
+##### Zoom out to recognize chorus structures
+![Overture](imgs/Overture.png)
+
+
+
 ------------
 
 #### Explore several featured tracks or search for your own favorites!
