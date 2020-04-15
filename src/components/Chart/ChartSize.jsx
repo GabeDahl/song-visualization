@@ -27,7 +27,7 @@ export default function ChartSize(props) {
                     <Slider
                         value={props.value}
                         step={100}
-                        max={15000}
+                        max={20000}
                         min={300}
                         valueLabelDisplay="auto"
                         onChange={props.handleSizeSliderChange}

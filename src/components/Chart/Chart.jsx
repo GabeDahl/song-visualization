@@ -6,7 +6,7 @@ export default class Chart extends PureComponent {
         const pitchClasses = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B']
         const pitchColors = ['#ff3333', '#ff9933', '#ffff33', '#99ff33', '#33ff33', '#33ff99', '#33ffff', '#3399ff', '#3333ff', '#9933ff', '#ff33ff', '#ff3399']
         
-        const { segments, width, height } = this.props
+        const { segments, width, height, pitches } = this.props
         return (
             <div style={{maxWidth: '95%', overflowX: 'auto', overflowY: 'hidden'}}>
             <ResponsiveContainer width={width} height={height} debounce={5}>
@@ -37,7 +37,9 @@ export default class Chart extends PureComponent {
                         content={renderLegend}
                     />
                     {pitchClasses.map((p, i) => {
-                        return <Area fillOpacity="1" strokeOpacity='1' name={p} stackId='1' stroke={pitchColors[i]} fill={pitchColors[i]} dataKey={(s) => s.pitches[i]}/>
+                        if (pitches[p] === true) {
+                            return <Area fillOpacity="1" strokeOpacity='1' name={p} stackId='1' stroke={pitchColors[i]} fill={pitchColors[i]} dataKey={(s) => s.pitches[i]}/>
+                        }
                     })}
                     
                     {/* Dynamically Painted Bar Chart */}

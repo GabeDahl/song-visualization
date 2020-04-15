@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Chart from './Chart/Chart'
 import ChartSize from './Chart/ChartSize'
+import PitchSelect from './Chart/PitchSelect'
 import Header from './Header/Header'
 
 import {getAnalysis} from '../actions'
@@ -15,8 +16,20 @@ export class Layout extends Component {
     state = {
         width: 6000,
         height: 250,
-        pitchClasses : ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'],
-        activePitches: [],
+        pitches: {
+            'C': false,
+            'C#': true,
+            'D': true,
+            'D#': true,
+            'E': true,
+            'F': false,
+            'F#': true,
+            'G': true,
+            'G#': true,
+            'A': true,
+            'A#': true,
+            'B': true
+        },
         openFromSearch: false
     }
 
@@ -24,9 +37,13 @@ export class Layout extends Component {
         this.setState({width : newValue})
     }
 
-    // handleChange = (event) => {
-    //     this.setState({ activePitches[event.target.name]: event.target.checked });
-    //   };
+    handleCheck = (event) => {
+        const e = event
+        this.setState({ pitches: {
+            ...this.state.pitches,
+            [e.target.name]: e.target.checked 
+        } })
+    }
 
     render() {
         return (
@@ -37,7 +54,7 @@ export class Layout extends Component {
                 <Grid container item xs={12} sm={12} justify='center'>
                     <Card style={{maxWidth: '95%', overflowX: 'auto', backgroundColor: '#0f0f0f'}}>
                         <CardContent>
-                            <Grid container spacing={3} alignItems='flex-end' justify='space-evenly' style={{maxWidth: '95vw'}}>
+                            <Grid container spacing={3} alignItems='center' justify='center' style={{maxWidth: '95vw'}}>
                                 <Grid item><Avatar style={{border: '1px solid white'}} alt='album-image' src={this.props.albumURL} variant='rounded' >A</Avatar></Grid>
                                 <Grid item><Typography variant='h5' style={{color: '#f1f1f1'}}>{this.props.name}</Typography></Grid>
                                 <Grid item><Typography variant='h7' style={{color: '#666'}}>{this.props.artist}</Typography></Grid>
@@ -46,6 +63,7 @@ export class Layout extends Component {
                                 segments={this.props.segments}
                                 width={this.state.width}
                                 height={this.state.height}
+                                pitches={this.state.pitches}
                             />
                         </CardContent>
                     </Card>
@@ -65,7 +83,10 @@ export class Layout extends Component {
                     <Grid item id='right' xs={12} sm={6}>
                         <Card>
                             <CardContent>
-                                
+                                <PitchSelect 
+                                    pitches={this.state.pitches}
+                                    handleCheck={this.handleCheck}
+                                />
                             </CardContent>
                         </Card>
                     </Grid>
