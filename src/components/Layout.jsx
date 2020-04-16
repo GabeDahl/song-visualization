@@ -3,6 +3,7 @@ import Chart from './Chart/Chart'
 import ChartSize from './Chart/ChartSize'
 import PitchSelect from './Chart/PitchSelect'
 import Header from './Header/Header'
+import SectionChart from './Chart/SectionChart'
 
 import {getAnalysis} from '../actions'
 import { connect } from 'react-redux'
@@ -17,12 +18,12 @@ export class Layout extends Component {
         width: 6000,
         height: 250,
         pitches: {
-            'C': false,
+            'C': true,
             'C#': true,
             'D': true,
             'D#': true,
             'E': true,
-            'F': false,
+            'F': true,
             'F#': true,
             'G': true,
             'G#': true,
@@ -59,12 +60,20 @@ export class Layout extends Component {
                                 <Grid item><Typography variant='h5' style={{color: '#f1f1f1'}}>{this.props.name}</Typography></Grid>
                                 <Grid item><Typography variant='h7' style={{color: '#666'}}>{this.props.artist}</Typography></Grid>
                             </Grid>
-                            <Chart
-                                segments={this.props.segments}
-                                width={this.state.width}
-                                height={this.state.height}
-                                pitches={this.state.pitches}
-                            />
+                            <div style={{maxWidth: '95%', overflowX: 'auto', overflowY: 'hidden'}}>
+                                <SectionChart 
+                                    sections={this.props.sections}
+                                    segments={this.props.segments}
+                                    width={this.state.width}
+                                    height={this.state.height}
+                                />
+                                <Chart
+                                    segments={this.props.segments}
+                                    width={this.state.width}
+                                    height={this.state.height}
+                                    pitches={this.state.pitches}
+                                />
+                            </div>
                         </CardContent>
                     </Card>
                 </Grid>
@@ -99,6 +108,7 @@ export class Layout extends Component {
 const mapStateToProps = state => ({
     analysis: state.analysis,
     segments: state.analysis.segments,
+    sections: state.analysis.sections,
     name: state.analysis.name,
     artist: state.analysis.artist,
     albumURL: state.analysis.albumURL

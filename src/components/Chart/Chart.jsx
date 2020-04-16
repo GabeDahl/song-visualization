@@ -8,7 +8,6 @@ export default class Chart extends PureComponent {
         
         const { segments, width, height, pitches } = this.props
         return (
-            <div style={{maxWidth: '95%', overflowX: 'auto', overflowY: 'hidden'}}>
             <ResponsiveContainer width={width} height={height} debounce={5}>
                 <ComposedChart 
                     barGap={1}
@@ -50,7 +49,6 @@ export default class Chart extends PureComponent {
                     </Bar> */}
                 </ComposedChart>
             </ResponsiveContainer>
-            </div>
         )
     }
 }
