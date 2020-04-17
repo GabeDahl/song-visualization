@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles, GridList, GridListTile, Typography, Button, List, ListItem } from '@material-ui/core';
+import { makeStyles, Typography, Button, List, ListItem } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
     tile: {
@@ -11,16 +11,10 @@ const useStyles = makeStyles((theme) => ({
     }
 }))
 
-const chords = [
-    ['chord1', 'https://google.com'],
-    ['chord1', 'https://google.com'],
-    ['chord1', 'https://google.com'],
-    ['chord1', 'https://google.com'],
-    ['chord1', 'https://google.com'],
-    ['chord1', 'https://google.com']
-]
+
 export default function PitchSelect(props) {
   const classes = useStyles()
+  const { chords } = props
   return (
     <List className={classes.list}>
         {chords.map((chord) => {
