@@ -14,9 +14,9 @@ const useStyles = makeStyles((theme) => ({
   search: {
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
-    backgroundColor: fade(theme.palette.common.white, 0.15),
+    backgroundColor: fade(theme.palette.common.white, 0.45),
     '&:hover': {
-      backgroundColor: fade(theme.palette.common.white, 0.25),
+      backgroundColor: fade(theme.palette.common.white, 0.65),
     },
     marginLeft: 0,
     width: '100%',
@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
   },
   inputRoot: {
-    color: 'inherit',
+    color: theme.palette.primary,
   },
   inputInput: {
     padding: theme.spacing(1, 1, 1, 0),
@@ -83,7 +83,7 @@ export default function FormPropsTextFields(props) {
           fullWidth='true'
           onChange={handleChange}
           onKeyDown={keyPress}
-          placeholder="Search Tracks…"
+          placeholder="Search..."
           classes={{
             root: classes.inputRoot,
             input: classes.inputInput,

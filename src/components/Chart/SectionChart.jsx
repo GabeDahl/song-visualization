@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { ComposedChart, ResponsiveContainer, XAxis, YAxis, Tooltip, Bar, Cell } from 'recharts'
+import { ComposedChart, ResponsiveContainer, XAxis, YAxis, Tooltip, Bar, Cell, Legend } from 'recharts'
 
 export default class Chart extends PureComponent {
     render() {
@@ -7,20 +7,26 @@ export default class Chart extends PureComponent {
         
         const { sections, width} = this.props
         return (
-            <ResponsiveContainer width={width} height={100} debounce={5}>
+            <ResponsiveContainer width={width} height={20} debounce={5}>
                 <ComposedChart 
                     barGap={1}
                     data={sections}
                     margin={{
-                        top: 15, right: 20, left: 32, bottom: 0,
+                        top: 15, right: 20, left: 0, bottom: 0,
                     }}
                 >    
                     <XAxis hide='true' dataKey='start' unit='s' />
-                    <YAxis hide='true' height={80}/>
-                    <Tooltip 
-                        content={renderTooltip}
+                    <YAxis hide='true' height={10}/>
+                    <Legend
+                        align='left'
+                        height={20}
+                        layout='vertical' 
+                        content={renderLegend}
                     />
-                    <Bar dataKey='start' minPointSize={50} barGap={0} barCategoryGap={0}>
+                    {/* <Tooltip 
+                        content={renderTooltip}
+                    /> */}
+                    <Bar dataKey='start' minPointSize={10} barGap={0}>
                         { sections ? sections.map((entry, index) => (
                             <Cell key={`cell-${index}`} fill={pitchColors[entry.key]}/>
                         )) : null}
@@ -31,13 +37,21 @@ export default class Chart extends PureComponent {
     }
 }
 
-const renderTooltip = ({ active, payload, label }) => {
-    const pitchClasses = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B']
-    if (active === true) {
-        return  (
-            <div style={{backgroundColor: '#010101'}}>
-                <div className='label'>{`${pitchClasses[payload[0].payload.key]}`}</div>
-            </div>
-        )
-    }
+const renderLegend = () => {
+    return (
+        <ul style={{height: 20, display: 'table', paddingLeft: 10, marginTop: 0, listStyleType: 'none'}}>
+            <li style={{color: '#f1f1f1'}}>Key</li>
+        </ul>
+    )
 }
+
+// const renderTooltip = ({ active, payload, label }) => {
+//     const pitchClasses = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B']
+//     if (active === true) {
+//         return  (
+//             <div style={{backgroundColor: '#010101', padding: 10}}>
+//                 <div style={{color:'#f1f1f1'}}>{`${pitchClasses[payload[0].payload.key]}`}</div>
+//             </div>
+//         )
+//     }
+// }

@@ -2,16 +2,17 @@ import React, { Component } from 'react'
 import Chart from './Chart/Chart'
 import ChartSize from './Chart/ChartSize'
 import PitchSelect from './Chart/PitchSelect'
+import ChordButtons from './Chart/ChordButtons'
 import Header from './Header/Header'
 import SectionChart from './Chart/SectionChart'
 
 import {getAnalysis} from '../actions'
 import { connect } from 'react-redux'
-import { Card, Grid, Typography, CardContent, Avatar, } from '@material-ui/core'
+import { Card, Grid, Typography, CardContent, Avatar, Backdrop, CircularProgress, } from '@material-ui/core'
 
 export class Layout extends Component {
     componentDidMount() {
-        this.props.getAnalysis('3XfvTelX1xYLgwgpzfd8qi')
+        this.props.getAnalysis('7MwwPyZJ7UKFROj2oVnH6R')
     }
 
     state = {
@@ -48,7 +49,8 @@ export class Layout extends Component {
 
     render() {
         return (
-            <Grid container direction='column' justify='center' alignItems='center' spacing={3}>
+            <div className='wrapper'>
+            <Grid container direction='column' justify='center' alignItems='center' spacing={1}>
                 <Grid item xs={12} sm={12}>
                     <Header />
                 </Grid>
@@ -77,9 +79,9 @@ export class Layout extends Component {
                         </CardContent>
                     </Card>
                 </Grid>
-                <Grid item container xs={12} sm={12} spacing={3}>
+                <Grid item container xs={12} sm={12} spacing={1}>
                     <Grid item id='left' xs={12} sm={6}>
-                        <Card>
+                        <Card style={{height: '100%', backgroundColor: '#0f0f0f'}}>
                             <CardContent>
                                 <ChartSize 
                                     handleSizeSliderChange={this.handleSizeSliderChange}
@@ -90,7 +92,7 @@ export class Layout extends Component {
                         </Card>
                     </Grid>
                     <Grid item id='right' xs={12} sm={6}>
-                        <Card>
+                        <Card style={{height: '100%', backgroundColor: '#0f0f0f'}}>
                             <CardContent>
                                 <PitchSelect 
                                     pitches={this.state.pitches}
@@ -99,8 +101,19 @@ export class Layout extends Component {
                             </CardContent>
                         </Card>
                     </Grid>
+                    <Grid item id='right' xs={12} sm={12}>
+                        <Card style={{ backgroundColor: '#0f0f0f'}}>
+                            <CardContent>
+                                <ChordButtons />
+                            </CardContent>
+                        </Card>
+                    </Grid>
                 </Grid>
+                {/* <Backdrop style={{zIndex: 1000}} open='true'>
+                    <CircularProgress />
+                </Backdrop> */}
             </Grid>
+            </div>
         )
     }
 }

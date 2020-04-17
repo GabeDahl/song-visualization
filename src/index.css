@@ -1,6 +1,10 @@
 body {
-    background-color: white;
+    background-color: #414141;
     margin: 0px;
+}
+
+.wrapper {
+  -webkit-overflow-scrolling: touch;
 }
 
 /* Chrome, Safari, Edge, Opera */
