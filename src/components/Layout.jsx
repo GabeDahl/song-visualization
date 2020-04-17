@@ -8,13 +8,9 @@ import SectionChart from './Chart/SectionChart'
 
 import {getAnalysis} from '../actions'
 import { connect } from 'react-redux'
-import { Card, Grid, Typography, CardContent, Avatar, Backdrop, CircularProgress, } from '@material-ui/core'
+import { Card, Grid, Typography, CardContent, Avatar, Backdrop, CircularProgress, LinearProgress, } from '@material-ui/core'
 
 export class Layout extends Component {
-    componentDidMount() {
-        this.props.getAnalysis('7MwwPyZJ7UKFROj2oVnH6R')
-    }
-
     state = {
         width: 6000,
         height: 250,
@@ -48,39 +44,53 @@ export class Layout extends Component {
     }
 
     render() {
+        console.log(Object.keys(this.props.analysis).length)
         return (
             <div className='wrapper'>
-            <Grid container direction='column' justify='center' alignItems='center' spacing={1}>
+            <Grid container direction='column' justify='center' alignItems='center' spacing={2}>
                 <Grid item xs={12} sm={12}>
                     <Header />
                 </Grid>
                 <Grid container item xs={12} sm={12} justify='center'>
-                    <Card style={{maxWidth: '95%', overflowX: 'auto', backgroundColor: '#0f0f0f'}}>
+                    <Card style={{ maxWidth: '99%', overflowX: 'auto', backgroundColor: '#0f0f0f'}}>
                         <CardContent>
-                            <Grid container spacing={3} alignItems='center' justify='center' style={{maxWidth: '95vw'}}>
-                                <Grid item><Avatar style={{border: '1px solid white'}} alt='album-image' src={this.props.albumURL} variant='rounded' >A</Avatar></Grid>
-                                <Grid item><Typography variant='h5' style={{color: '#f1f1f1'}}>{this.props.name}</Typography></Grid>
-                                <Grid item><Typography variant='h7' style={{color: '#666'}}>{this.props.artist}</Typography></Grid>
-                            </Grid>
-                            <div style={{maxWidth: '95%', overflowX: 'auto', overflowY: 'hidden'}}>
-                                <SectionChart 
-                                    sections={this.props.sections}
-                                    segments={this.props.segments}
-                                    width={this.state.width}
-                                    height={this.state.height}
-                                />
-                                <Chart
-                                    segments={this.props.segments}
-                                    width={this.state.width}
-                                    height={this.state.height}
-                                    pitches={this.state.pitches}
-                                />
-                            </div>
+                            {Object.keys(this.props.analysis).length < 1 ? 
+                                <Grid container direction='column' justify='center' alignItems='center' style={{height: this.state.height, width: '95vw'}}>
+                                    <Typography variant='h2'  color='secondary'  >Welcome!</Typography>
+                                    <Typography variant='h5' color='secondary' >Use the search bar above to find virtually any song!</Typography>
+                                    <Typography variant='h6' color='secondary' >Search by track, album, or artist name.</Typography>
+                                    <div style={{height: 5, width: '50%'}}>
+                                        <LinearProgress variant='query' style={{height: 5, width: '100%'}}/>    
+                                    </div>
+                                </Grid>
+                            :
+                                <div>
+                                    <Grid container spacing={3} alignItems='center' justify='center' style={{maxWidth: '95vw'}}>
+                                        <Grid item><Avatar style={{border: '1px solid white'}} alt='album-image' src={this.props.albumURL} variant='rounded' >A</Avatar></Grid>
+                                        <Grid item><Typography variant='h5' style={{color: '#f1f1f1'}}>{this.props.name}</Typography></Grid>
+                                        <Grid item><Typography variant='h7' style={{color: '#666'}}>{this.props.artist}</Typography></Grid>
+                                    </Grid>
+                                    <div style={{maxWidth: '98%', overflowX: 'auto', overflowY: 'hidden'}}>
+                                        <SectionChart 
+                                            sections={this.props.sections}
+                                            segments={this.props.segments}
+                                            width={this.state.width}
+                                            height={this.state.height}
+                                        />
+                                        <Chart
+                                            segments={this.props.segments}
+                                            width={this.state.width}
+                                            height={this.state.height}
+                                            pitches={this.state.pitches}
+                                        />
+                                    </div>
+                                </div>
+                            }
                         </CardContent>
                     </Card>
                 </Grid>
                 <Grid item container xs={12} sm={12} spacing={1}>
-                    <Grid item id='left' xs={12} sm={6}>
+                    <Grid item id='left' xs={12} sm={4}>
                         <Card style={{height: '100%', backgroundColor: '#0f0f0f'}}>
                             <CardContent>
                                 <ChartSize 
@@ -91,13 +101,15 @@ export class Layout extends Component {
                             </CardContent>
                         </Card>
                     </Grid>
-                    <Grid item id='right' xs={12} sm={6}>
+                    <Grid item id='right' xs={12} sm={8}>
                         <Card style={{height: '100%', backgroundColor: '#0f0f0f'}}>
-                            <CardContent>
-                                <PitchSelect 
-                                    pitches={this.state.pitches}
-                                    handleCheck={this.handleCheck}
-                                />
+                            <CardContent style={{height: '100%', paddingTop: 0, paddingBottom: 0}}>
+                                <Grid style={{height: '100%'}} container alignItems='center' justify='center'>
+                                    <PitchSelect 
+                                        pitches={this.state.pitches}
+                                        handleCheck={this.handleCheck}
+                                    />
+                                </Grid>
                             </CardContent>
                         </Card>
                     </Grid>

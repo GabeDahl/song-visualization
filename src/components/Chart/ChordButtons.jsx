@@ -14,17 +14,17 @@ const useStyles = makeStyles((theme) => ({
 
 export default function PitchSelect(props) {
   const classes = useStyles()
-  const { chords } = props
+//   const { chords } = props
   return (
     <List className={classes.list}>
-        {chords.map((chord) => {
+        {/* {chords.map((chord) => {
             return (
                 <ListItem>
-                    <Typography>{chord[0]}</Typography>
+                    <Typography>hi</Typography>
                     <Button variant='contained' color='primary'>Demo</Button>
                 </ListItem>
             )
-        })}
+        })} */}
     </List>
   )
 }

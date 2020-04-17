@@ -11,9 +11,6 @@ const useStyles = makeStyles(theme => ({
     appBar: {
         width: '100%',
         backgroundColor: '#0f0f0f'
-    },
-    title: {
-        color: '#f1f1f1'
     }
 }));
 
@@ -27,7 +24,7 @@ export default function Header() {
                     <Grid container>
                         <Grid item container justify='center' alignItems='center' xs={6}>
                             <Grid item>
-                                <Typography variant='h4' className={classes.title}>Pitch Visualizer</Typography>
+                                <Typography variant='h4' color='secondary'>Pitch Visualizer</Typography>
                             </Grid>
                         </Grid>
                         <Grid item container alignItems='center' xs={6}>
