@@ -59,7 +59,7 @@ export class Layout extends Component {
                                     <Typography variant='h2'  color='secondary'  >Welcome!</Typography>
                                     <Typography variant='h5' color='secondary' >Use the search bar above to find virtually any song!</Typography>
                                     <Typography variant='h6' color='secondary' >Search by track, album, or artist name.</Typography>
-                                    <div style={{height: 5, width: '50%'}}>
+                                    <div style={{height: 5, marginTop: 40, width: '50%'}}>
                                         <LinearProgress variant='query' style={{height: 5, width: '100%'}}/>    
                                     </div>
                                 </Grid>
