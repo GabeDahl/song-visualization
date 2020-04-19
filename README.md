@@ -1,6 +1,5 @@
 # Song Visualition
-
-A link to the live app will go here soon.
+[Check out the demo here!](http://songvisualizer.com)
 
 ------------
 
