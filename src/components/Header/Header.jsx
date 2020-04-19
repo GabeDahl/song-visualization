@@ -22,9 +22,9 @@ export default function Header() {
             <AppBar position='sticky' className={classes.appBar} >
                 <Toolbar>
                     <Grid container>
-                        <Grid item container justify='center' alignItems='center' xs={6}>
+                        <Grid item container justify='flex-start' alignItems='center' xs={6}>
                             <Grid item>
-                                <Typography variant='h4' color='secondary'>Pitch Visualizer</Typography>
+                                <Typography align='center' variant='h4' color='primary'>Song Visualizer</Typography>
                             </Grid>
                         </Grid>
                         <Grid item container alignItems='center' xs={6}>

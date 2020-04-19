@@ -1,5 +1,9 @@
 import React, { PureComponent } from 'react'
+import moment from 'moment'
 import { ComposedChart, ResponsiveContainer, XAxis, YAxis, Tooltip, Legend, Area } from 'recharts'
+
+var momentDurationFormatSetup = require("moment-duration-format")
+momentDurationFormatSetup(moment);
 
 export default class Chart extends PureComponent {
     render() {
@@ -16,7 +20,31 @@ export default class Chart extends PureComponent {
                         top: 15, right: 20, left: 0, bottom: 0,
                     }}
                 >    
-                    <XAxis dataKey='start' unit='s' />
+                    <XAxis dataKey='start'  tickFormatter={time => {
+                        let timeStr = time.toString().split('')
+                        if (timeStr.includes('.')) {
+                            const sec = timeStr.slice(0, timeStr.findIndex(el => el === '.')).join('')
+                            let  milsec = timeStr.slice(timeStr.findIndex(el => el === '.') + 1).join('')
+                            if (milsec.length === 2) {
+                                milsec = milsec.concat('0')
+                            } else {
+                                milsec = milsec.concat('00')
+                            }
+                            let t = moment.duration.format([
+                                moment.duration({
+                                    seconds: sec,
+                                    milliseconds: milsec
+                                })], 'm:ss.S')[0]
+                            return t.substring(0, t.length-1)
+                        } else {
+                            return moment.duration.format([
+                                moment.duration({
+                                    seconds : time
+                                })
+                            ], 'm:ss.S')
+                        }
+                    }
+                    } />
                     <YAxis 
                         tickFormatter={(value) =>  `${value.toFixed(0)}%`} 
                         domain={[0, 100]} 

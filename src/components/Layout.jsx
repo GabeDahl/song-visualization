@@ -12,7 +12,7 @@ import { Card, Grid, Typography, CardContent, Avatar, Backdrop, CircularProgress
 
 export class Layout extends Component {
     state = {
-        width: 6000,
+        width: 2000,
         height: 250,
         pitches: {
             'C': true,
@@ -43,23 +43,50 @@ export class Layout extends Component {
         } })
     }
 
+    handleChordClick = (event) => {
+        const e = event
+        const pitchClasses = ['C','C#','D','D#','E','F','F#','G','G#','A','A#','B']
+        const numbers = [0,1,2,3,4,5,6,7,8,9,10,11] 
+
+        numbers.map((item) => {
+            this.setState( (state) => ({
+                pitches: {
+                    ...state.pitches,
+                    [pitchClasses[item]] : false
+                }
+            }))
+        })
+
+        setTimeout(() => {
+            e.target.value.map((item) => {
+                this.setState((state, props) => ({
+                    pitches : {
+                        ...this.state.pitches,
+                        [pitchClasses[item]] : true
+                    }
+                }))
+            })
+        }, 100)
+    }
+
     render() {
-        console.log(Object.keys(this.props.analysis).length)
         return (
             <div className='wrapper'>
-            <Grid container direction='column' justify='center' alignItems='center' spacing={2}>
+            <Grid container direction='column' justify='center' alignItems='center' spacing={2} style={{width: '100vw'}}>
                 <Grid item xs={12} sm={12}>
                     <Header />
                 </Grid>
                 <Grid container item xs={12} sm={12} justify='center'>
-                    <Card style={{ maxWidth: '99%', overflowX: 'auto', backgroundColor: '#0f0f0f'}}>
+                    <Card style={{ maxWidth: '99%', minWidth: '99%', overflowX: 'auto', backgroundColor: '#0f0f0f'}}>
                         <CardContent>
                             {Object.keys(this.props.analysis).length < 1 ? 
                                 <Grid container direction='column' justify='center' alignItems='center' style={{height: this.state.height, width: '95vw'}}>
-                                    <Typography variant='h2'  color='secondary'  >Welcome!</Typography>
-                                    <Typography variant='h5' color='secondary' >Use the search bar above to visualize virtually any song.</Typography>
-                                    <Typography variant='h6' color='secondary' >Search by track, album, or artist name.</Typography>
-                                    <div style={{height: 5, marginTop: 40, width: '50%'}}>
+                                    <div style={{height: 5, marginBottom: 40, width: '100%'}}>
+                                        <LinearProgress style={{height: 5, width: '100%'}}/>    
+                                    </div>
+                                    <Typography variant='h5' align='center' color='secondary' >Use the search bar above to visualize the pitches throughout virtually any song</Typography>
+                                    <Typography variant='h6' align='center' color='secondary' >Search by track, album, and/or artist name</Typography>
+                                    <div style={{height: 5, marginTop: 40, width: '100%'}}>
                                         <LinearProgress variant='query' style={{height: 5, width: '100%'}}/>    
                                     </div>
                                 </Grid>
@@ -89,7 +116,7 @@ export class Layout extends Component {
                         </CardContent>
                     </Card>
                 </Grid>
-                <Grid item container xs={12} sm={12} spacing={1}>
+                <Grid item container xs={12} sm={12} spacing={2}>
                     <Grid item id='left' xs={12} sm={4}>
                         <Card style={{height: '100%', backgroundColor: '#0f0f0f'}}>
                             <CardContent>
@@ -97,7 +124,6 @@ export class Layout extends Component {
                                     handleSizeSliderChange={this.handleSizeSliderChange}
                                     value={this.state.width}
                                 />
-                                
                             </CardContent>
                         </Card>
                     </Grid>
@@ -116,7 +142,7 @@ export class Layout extends Component {
                     <Grid item id='right' xs={12} sm={12}>
                         <Card style={{ backgroundColor: '#0f0f0f'}}>
                             <CardContent>
-                                <ChordButtons />
+                                <ChordButtons handleChordClick={this.handleChordClick} />
                             </CardContent>
                         </Card>
                     </Grid>

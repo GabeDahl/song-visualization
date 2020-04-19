@@ -20,7 +20,7 @@ export default function ChartSize(props) {
     return (
         <div className={classes.root}>
             <Typography id="input-slider" gutterBottom color='primary'>
-                Chart Width
+                Zoom
             </Typography>
             <Grid container spacing={2} alignItems="center">
                 <Grid item xs>
