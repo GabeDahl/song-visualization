@@ -3,6 +3,7 @@ import { makeStyles, Typography, Grid, Select, MenuItem, InputLabel, FormControl
 
 const useStyles = makeStyles((theme) => ({
     select: {
+        color: '#1ED760',
         width: '90%',
         '&:before': {
             borderColor: '#1ED760',
