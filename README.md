@@ -1,3 +1,5 @@
+# Update 2021 -- The live demo is no longer active. You may clone it and run it locally with your own Spotify API credentials.
+
 # Song Visualition
 
 
